@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e7ffe9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #e7ffe9;
+            margin-top: 7cm;
+            padding: 20px;
+            border-radius: 8px;
+            border-color: #00796b;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            max-width: 700px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        form input, form select, form button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #e7ffe9;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #e7ffe9;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .add-employee {
+            margin-top: 5px;
+            cursor: pointer;
+            color: #3498db;
+        }
+
+        .carbon-footprint {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7ffe9;
+            border-radius: 5px;
+            border: 1px solid #b2ebf2;
+            display: none;
+        }
+
+        .carbon-footprint h3 {
+            margin: 0;
+            color: #00796b;
+        }
+
+        .view-report-button {
+            margin-top: 20px;
+            background-color: #2e78cc;
+        }
+    </style>
+</head>
+<body style="background-image: url(Img/bgcal.jpg); background-repeat: no-repeat; background-size: cover;">
+
+    <section id="header" style="position: fixed; height: 60px;">
+        <a href="#"><img src="img/logo.png" class="logo" alt="" width="50" height="62">
+        </a>
+
+        <div>
+            <ul id="navbar">
+                <h3 style="margin-right: 10.5cm ;">Carbon Gauge</h3>
+                <li><a  href="index.html">Home</a></li>
+                <li><a class="active" href="calculator.html">Calculator</a></li>
+                <li><a href="report.html">Report</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a  href="about.html">About</a></li>
+                <img src="img/proimg.jpeg" class="logo" alt="" width="45" height="45">
+                </i>
+                </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="container">
+        <header>
+            <h1>Carbon Footprint Calculator</h1>
+            <p>Select your mode of transport and fill in the details to calculate your carbon footprint.</p>
+        </header>
+
+
+        <!-- Transport Mode Selection -->
+        <div>
+            <label for="transport">Select Mode of Transport:</label>
+            <select id="transport" onchange="showForm()">
+                <option value="none">-- Select --</option>
+                <option value="car">Car/Two-Wheeler</option>
+                <option value="metro">Metro</option>
+                <option value="bus">Bus</option>
+            </select>
+        </div>
+
+        <!-- Car/Two-Wheeler Form -->
+        <div id="car-form" class="transport-form" style="display:none;">
+            <h2>Car/Two-Wheeler Details</h2>
+            <form id="carForm" onsubmit="return calculateCarbonFootprint('car')">
+                <input type="text" id="empId" name="empId" placeholder="Employee ID" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="text" id="phone" name="phone" placeholder="Phone Number" required>
+                <input type="number" id="distance" name="distance" placeholder="Distance Travelled (km)" required>
+                
+                <label for="carpool">Carpool/Bike Pooling?</label>
+                <select id="carpool" name="carpool" onchange="toggleCarpoolField()">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+
+                <!-- Employee ID for Carpooling -->
+                <div id="carpoolSection" style="display:none;">
+                    <input type="text" name="carpoolEmpId" placeholder="Employee ID for Carpooling">
+                    <div id="additionalEmpIds"></div>
+                    <span class="add-employee" onclick="addCarpoolField()">+ Add another Employee ID</span>
+                </div>
+
+                <label for="vehicleType">Select Vehicle Type:</label>
+                <select id="vehicleType" name="vehicleType">
+                    <option value="petrol">Petrol</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="electric">Electric</option>
+                    <option value="hybrid">Hybrid</option>
+                </select>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Metro Form -->
+        <div id="metro-form" class="transport-form" style="display:none;">
+            <h2>Metro Details</h2>
+            <form id="metroForm" onsubmit="return calculateCarbonFootprint('metro')">
+                <input type="text" id="metroId" name="metroId" placeholder="Metro ID" required>
+                <input type="text" id="empId" name="empId" placeholder="Employee ID" required>
+                <input type="text" id="metroPhone" name="metroPhone" placeholder="Phone Number" required>
+                <input type="number" id="metroDistance" name="metroDistance" placeholder="Distance Travelled (km)" required>
+                
+                <label for="metroVehicleType">Vehicle Type:</label>
+                <select id="metroVehicleType" name="metroVehicleType">
+                    <option value="electric">Electric</option>
+                </select>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Bus Form -->
+        <div id="bus-form" class="transport-form" style="display:none;">
+            <h2>Bus Details</h2>
+            <form id="busForm" onsubmit="return calculateCarbonFootprint('bus')">
+                <input type="text" id="empId" name="empId" placeholder="Employee ID" required>
+                <input type="text" id="busPhone" name="busPhone" placeholder="Phone Number" required>
+                <input type="number" id="busDistance" name="busDistance" placeholder="Distance Travelled (km)" required>
+                
+                <label for="busVehicleType">Vehicle Type:</label>
+                <select id="busVehicleType" name="busVehicleType">
+                    <option value="diesel">Diesel</option>
+                    <option value="electric">Electric</option>
+                </select>
+
+                <label for="ticket">Upload Ticket:</label>
+                <input type="file" id="ticket" name="ticket">
+                <input type="text" id="ticketDate" name="ticketDate" placeholder="Ticket Date">
+                <input type="text" id="ticketTime" name="ticketTime" placeholder="Ticket Time">
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Carbon Footprint Result -->
+        <div id="carbon-footprint" class="carbon-footprint">
+            <h3>Your Carbon Footprint: <span id="carbon-value">0</span> kg CO2</h3>
+        </div>
+
+        <!-- View Report Button -->
+        <button class="view-report-button" onclick="viewReport()">View Report</button>
+    </div>
+
+    <script>
+        function showForm() {
+            var transport = document.getElementById("transport").value;
+            document.getElementById("car-form").style.display = "none";
+            document.getElementById("metro-form").style.display = "none";
+            document.getElementById("bus-form").style.display = "none";
+
+            if (transport === "car") document.getElementById("car-form").style.display = "block";
+            else if (transport === "metro") document.getElementById("metro-form").style.display = "block";
+            else if (transport === "bus") document.getElementById("bus-form").style.display = "block";
+        }
+
+        function toggleCarpoolField() {
+            document.getElementById("carpoolSection").style.display = 
+                document.getElementById("carpool").value === "yes" ? "block" : "none";
+        }
+
+        function addCarpoolField() {
+            const additionalEmpIds = document.getElementById("additionalEmpIds");
+            const newField = document.createElement("input");
+            newField.type = "text";
+            newField.name = "carpoolEmpId";
+            newField.placeholder = "Additional Employee ID";
+            additionalEmpIds.appendChild(newField);
+        }
+
+        function calculateCarbonFootprint(mode) {
+            let entry = { mode, carbonFootprint: 0 };
+            let distance = 0;
+
+            if (mode === "car") {
+                distance = parseFloat(document.getElementById("distance").value);
+                employeeId = document.getElementById("empId").value;
+                entry.distance = distance;
+                entry.employeeId = employeeId; 
+                entry.carbonFootprint = distance * 0.2; // Example calculation for car
+            } 
+            else if (mode === "metro") {
+                distance = parseFloat(document.getElementById("metroDistance").value);
+                employeeId = document.getElementById("empId").value;
+                entry.distance = distance;
+                entry.employeeId = employeeId; 
+                entry.carbonFootprint = distance * 0.05; // Example for metro
+            } 
+            else if (mode === "bus") {
+                distance = parseFloat(document.getElementById("busDistance").value);
+                employeeId = document.getElementById("empId").value;
+                entry.distance = distance;
+                entry.employeeId = employeeId; 
+                entry.carbonFootprint = distance * 0.1; // Example for bus
+            }
+
+            // Save data to localStorage
+            let storedData = JSON.parse(localStorage.getItem('carbonData')) || [];
+            storedData.push(entry);
+            localStorage.setItem('carbonData', JSON.stringify(storedData));
+
+            // Show result
+            document.getElementById("carbon-value").textContent = entry.carbonFootprint.toFixed(2);
+            document.getElementById("carbon-footprint").style.display = "block";
+            
+            return false;  // Prevent form submission
+        }
+
+        function viewReport() {
+            window.location.href = "report.html"; // Redirect to report page
+        }
+    </script>
+</body>
+</html>  

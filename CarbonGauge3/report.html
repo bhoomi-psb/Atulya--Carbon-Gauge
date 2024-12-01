@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Report</title>
+    <style>
+        body {
+            background-image: url(Img/bammer1.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            background-color: #e7ffe9;
+            margin: 5cm;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Header Section Styles */
+        #header {
+            background-color: #e7ffe9;
+            padding: 10px 20px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        #header .logo {
+            vertical-align: middle;
+        }
+
+        #header h3 {
+            color: white;
+            margin-right: 10px;
+        }
+
+        #header img {
+            border-radius: 50%;
+        }
+
+        /* Main Content Styles */
+        .container {
+            background-color: #e7ffe9;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 550px;
+            margin-top: 50px; /* Add margin to avoid overlap with the fixed header */
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .buttons {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #00ba06;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #41e146;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #00ba06;
+            color: white;
+        }
+
+        canvas {
+            margin-top: 20px;
+            max-width: 80%; /* Reduce the max width of the canvas */
+            height: auto; /* Ensure the aspect ratio is maintained */
+        }
+
+        .graph-type-buttons {
+            margin-top: 20px;
+        }
+
+        .graph-type-buttons button {
+            margin: 5px;
+        }
+
+        .back-button {
+            margin-top: 20px;
+        }
+    </style>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    
+    <!-- Main Content Section -->
+    <div class="container">
+        <h1>Carbon Footprint Report</h1>
+
+        <div class="buttons">
+            <button onclick="showTable()">Show Table</button>
+            <button onclick="showGraph()">Show Graph</button>
+        </div>
+
+        <!-- Table for Carbon Footprint Data -->
+        <div id="table-container" style="display: none;">
+            <table id="carbon-table">
+                <thead>
+                    <tr>
+                        <th>Mode of Transport</th>
+                        <th>Distance Travelled (km)</th>
+                        <th>Carbon Footprint (kg CO2)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be inserted here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Graph for Carbon Footprint Data -->
+        <div id="graph-container" style="display: none;">
+            <canvas id="carbon-chart"></canvas>
+            <!-- Graph Type Buttons -->
+            <div class="graph-type-buttons">
+                <button onclick="updateGraph('bar')">Bar Chart</button>
+                <button onclick="updateGraph('line')">Line Chart</button>
+                <button onclick="updateGraph('pie')">Pie Chart</button>
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <div class="back-button">
+            <button onclick="goBack()">Go Back to Calculator</button>
+        </div>
+    </div>
+
+    <script>
+        // Load the carbon footprint data from localStorage
+        const carbonData = JSON.parse(localStorage.getItem('carbonData')) || [];
+
+        let carbonChartInstance = null;  // Store the chart instance to update it
+
+        // Function to show the table with the data
+        function showTable() {
+            document.getElementById("table-container").style.display = "block";
+            document.getElementById("graph-container").style.display = "none";
+
+            const tableBody = document.getElementById("carbon-table").getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = ""; // Clear the table
+
+            carbonData.forEach(entry => {
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = entry.mode;
+                row.insertCell(1).textContent = entry.distance;
+                row.insertCell(2).textContent = entry.carbonFootprint.toFixed(2);
+            });
+        }
+
+        // Function to show the graph with the data
+        function showGraph() {
+            document.getElementById("graph-container").style.display = "block";
+            document.getElementById("table-container").style.display = "none";
+
+            // Default graph type is 'bar'
+            updateGraph('bar');
+        }
+
+        // Function to update graph type
+        function updateGraph(type) {
+            const labels = [];
+            const carbonFootprints = [];
+            const transportModes = [];
+
+            // Clear the previous chart instance
+            if (carbonChartInstance) {
+                carbonChartInstance.destroy();
+            }
+
+            // For Pie Chart, group data by mode of transport and sum the carbon footprints
+            if (type === 'pie') {
+                const modeMap = {};
+
+                carbonData.forEach(entry => {
+                    if (modeMap[entry.mode]) {
+                        modeMap[entry.mode] += entry.carbonFootprint;
+                    } else {
+                        modeMap[entry.mode] = entry.carbonFootprint;
+                    }
+                });
+
+                // Prepare the data for the pie chart
+                for (const mode in modeMap) {
+                    transportModes.push(mode);
+                    carbonFootprints.push(modeMap[mode]);
+                }
+
+                // Create Pie Chart
+                const ctx = document.getElementById('carbon-chart').getContext('2d');
+                carbonChartInstance = new Chart(ctx, {
+                    type: 'pie',  
+                    data: {
+                        labels: transportModes, 
+                        datasets: [{
+                            label: 'Carbon Footprint by Transport Mode',
+                            data: carbonFootprints,
+                            backgroundColor: ['#3498db', '#2ecc71', '#e74c3c', '#f39c12'],
+                            borderColor: '#2980b9',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                        },
+                    }
+                });
+            } else {
+                // For Bar and Line Charts, use employee ID and carbon footprint
+                carbonData.forEach(entry => {
+                    labels.push(entry.employeeId);
+                    carbonFootprints.push(entry.carbonFootprint);
+                });
+
+                const ctx = document.getElementById('carbon-chart').getContext('2d');
+                carbonChartInstance = new Chart(ctx, {
+                    type: type,  // Dynamically change the graph type
+                    data: {
+                        labels: labels, 
+                        datasets: [{
+                            label: 'Carbon Footprint (kg CO2)',
+                            data: carbonFootprints,
+                            backgroundColor: '#3498db',
+                            borderColor: '#2980b9',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                        },
+                    }
+                });
+            }
+        }
+
+        // Function to go back to the calculator page
+        function goBack() {
+            window.location.href = "calculator.html"; // Redirect to the calculator page
+        }
+    </script>
+</body>
+</html>

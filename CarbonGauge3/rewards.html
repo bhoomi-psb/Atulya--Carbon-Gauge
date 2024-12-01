@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Gauge</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #13cc41;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #444;
+        }
+
+        .coupon-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .coupon-card {
+            background: #ddfac8;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .coupon-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .coupon-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: filter 0.3s;
+        }
+
+        .coupon-card:hover img {
+            filter: brightness(1.2);
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .card-content h3 {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: #222;
+        }
+
+        .card-content p {
+            font-size: 1em;
+            margin: 10px 0 20px;
+            color: #555;
+        }
+
+        .claim-button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #0c9305;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .claim-button:hover {
+            background-color: #09a63b;
+        }
+    </style>
+</head>
+<body>
+    
+    <section id="header">
+        <a href="#"><img src="img/logo.png" class="logo" alt="" width="50" height="62">
+        </a>
+
+        <div>
+            <ul id="navbar">
+                <h3 style="margin-right: 10.5cm ;color: black;">Carbon Gauge</h3>
+                <li><a  href="index.html">Home</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="report.html">Report</a></li>
+                <li><a class="active" href="rewards.html">Rewards</a></li>
+                <li><a  href="about.html">About</a></li>
+                <img src="img/proimg.jpeg" class="logo" alt="" width="45" height="45">
+                </i>
+                </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+   
+    <section id="page-header" class="about-header"> 
+        <h2 style="color: rgb(31, 31, 31); padding: 0; margin: 0%;">Exclusive Coupons</h2>
+        <p style="color: rgb(31, 31, 31); align-self: center;">Get to know Carbon Gauge and our dedicated team committed to empowering your journey toward a sustainable future</p>
+    </section>
+    <div class="container">
+        
+    
+    
+        <div class="coupon-cards">
+            <!-- Coupon Card 1 icruze -->
+            <div class="coupon-card">
+                <img src="Img/elec.jpg" alt="Coupon Image">
+                <div class="card-content">
+                    <h3>50% Off on Electronics</h3>
+                    <p>Save big on speakers.Limited time offer!</p>
+                    <button class="claim-button">Claim</button>
+                </div>
+            </div>
+
+            <!-- Coupon Card 2 skull candy -->
+            <div class="coupon-card">
+                <img src="Img/skullcandy.jpg" alt="Coupon Image">
+                <div class="card-content">
+                    <h3>Skullcandy Combo Offer!</h3>
+                    <p>Shop the best in headphones, earbuds, and audio gear today!</p>
+                    <button class="claim-button">Claim</button>
+                </div>
+            </div>
+
+            <!-- Coupon Card 3 flash.co-->
+            <div class="coupon-card">
+                <img src="Img/buy.jpg" alt="Coupon Image">
+                <div class="card-content">
+                    <h3>Buy 1 Get 1 Free</h3>
+                    <p>Applicable on selected clothing items. Don't miss out!</p>
+                    <button class="claim-button">Claim</button>
+                </div>
+            </div>
+
+            <!-- Coupon Card 4 piligrim-->
+            <div class="coupon-card">
+                <img src="Img/pilgrim.jpg" alt="Coupon Image">
+                <div class="card-content">
+                    <h3>Shop Pilgrim for Style & Savings</h3>
+                    <p>Buy 2, Get 1 Free on selected items.</p>
+                    <button class="claim-button">Claim</button>
+                </div>
+            </div>
+
+<!-- Coupon Card 5 ludo-->
+            <div class="coupon-card">
+                <img src="Img/play.jpg" alt="Coupon Image">
+                <div class="card-content">
+                    <h3>No Ads </h3>
+                    <p>Available for 1month</p>
+                    <button class="claim-button">Claim</button>
+                </div>
+            </div>
+
+<!-- Coupon Card 6 laptop-->
+
+            <div class="coupon-card">
+                <img src="Img/gift.jpg" alt="Coupon Image">
+                <div class="card-content">
+                    <h3>Suprise Gifts</h3>
+                    <p>Hurry! Don’t miss out</p>
+                    <button class="claim-button">Claim</button>
+                </div>
+            </div>
+
+<!-- Coupon Card 7 tvs-->
+            <div class="coupon-card">
+                <img src="Img/tvs.jpg" alt="Coupon Image">
+                <div class="card-content">
+                    <h3> Get More with TVS  </h3>
+                    <p>Don’t miss out on your surprise gift!</p>
+                    <button class="claim-button">Claim</button>
+                </div>
+            </div>
+
+
+<!-- Coupon Card 8 bmtc-->
+
+            <div class="coupon-card">
+                <img src="Img/bus.jpg" alt="Coupon Image">
+                <div class="card-content">
+                    <h3>Travel Smart with BMTC! </h3>
+                    <p>Free Ride Coupons: For every 5 rides, earn a free trip on your next journey</p>
+                    <button class="claim-button">Claim</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Sign Up For Newsletters</h4> 
+            <p>E-mail updates about our latest <span style="color:#47c35d";>Events.</span>
+            </p>
+        </div>
+        <div class="form">
+            <input type="test" placeholder="Your email address">
+            <button class="normal">Sign Up</button>
+        </div>
+        </div>
+    </section>
+
+
+
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="img/logo.png" alt="" width="55" height="65">
+            <h4>Contact</h4>
+            <p><strong>Address:</strong> #224th cross JHBCS layout <br><br>BSK 2nd stage Benguluru-78</p><br>
+            <p><strong>Phone:</strong> 080 775 6352/ 080 835 2635</p><br>
+            <div class="follow">
+                <h4>Follow us</h4>
+            <div class="icon">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-printerest"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4><br>
+            <a href="#">About us</a><br>
+            <a href="#">FAQs</a><br>
+            <a href="#">Privacy Policy</a><br>
+            <a href="#">Terms & Conditions</a><br>
+            <a href="#">Contact Us</a><br>
+
+        </div>
+
+        <div class="col">
+            <h4>What We Do</h4><br>
+            <a href="#">Sign In</a><br>
+            <a href="#">Carbon Footprint Assessment</a><br>
+            <a href="#">Community Engagement</a><br>
+            <a href="#">Workshops</a><br>
+            <a href="#">Help</a><br>
+        </div>
+
+        <div class="col install">
+            <h4>Make an Impact</h4><br>
+            <p>Get Started</p><br>
+            <div class="row">
+                <p>Rewards</p><br>
+                <p>Goals</p><br>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>Copyright © 2024-2028 - Carbon Gauge. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

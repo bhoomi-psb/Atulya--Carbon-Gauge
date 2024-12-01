@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Gauge</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+          }
+      
+          /* Floating button to open the chat */
+          #chat-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+          }
+      
+          #chat-btn:hover {
+            background-color: #45a049;
+          }
+      
+          /* The chat container (Initially hidden) */
+          .chat-container {
+            position: fixed;
+            bottom: 80px; /* Positioned just above the button */
+            right: 20px;
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: none; /* Hidden initially */
+            z-index: 9999;
+          }
+      
+          .chat-header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.5em;
+          }
+      
+          .chat-box {
+            height: 400px;
+            overflow-y: scroll;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-bottom: 2px solid #ccc;
+          }
+      
+          .user-msg, .bot-msg {
+            margin: 10px 0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            max-width: 70%;
+          }
+      
+          .user-msg {
+            background-color: #b3e5fc;
+            align-self: flex-end;
+          }
+      
+          .bot-msg {
+            background-color: #e8e8e8;
+            align-self: flex-start;
+          }
+      
+          .input-container {
+            display: flex;
+            padding: 15px;
+          }
+      
+          #user-input {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+          }
+      
+          #send-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+          }
+      
+          #send-btn:hover {
+            background-color: #45a049;
+          }
+      
+          .option-btn {
+            margin: 5px;
+            padding: 8px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+          }
+      
+          .option-btn:hover {
+            background-color: #0056b3;
+          }
+      
+          .back-btn {
+            margin: 10px 0;
+            padding: 8px 15px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+          }
+      
+          .back-btn:hover {
+            background-color: #d32f2f;
+          }
+        </style>
+</head>
+<body>
+    
+    <section id="header">
+        <a href="#"><img src="img/logo.png" class="logo" alt="" width="50" height="62">
+        </a>
+
+        <div>
+            <ul id="navbar">
+                <h3 style="margin-right: 10.5cm;">Carbon Gauge</h3>
+                <li><a  href="index.html">Home</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="report.html">Report</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a class="active" href="about.html">About</a></li>
+                <img src="img/proimg.jpeg" class="logo" alt="" width="45" height="45">
+                </i>
+                </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="page-header" class="about-header"> 
+        <h2 style="color: rgb(31, 31, 31);">#KnowUs</h2>
+        <p style="color: rgb(31, 31, 31); align-self: center;">Get to know Carbon Gauge and our dedicated team committed to empowering your journey toward a sustainable future</p>
+    </section>
+
+    <section id="about-head" class="section-p1">
+        <img src="img/img6.jpeg" height="800" alt="">
+        <div>
+            <h2>Our Mission</h2>
+            <p> Welcome to Carbon Gauge, your trusted partner in understanding and reducing your carbon footprint. Founded by a team of environmental advocates and tech innovators, we are dedicated to empowering individuals and businesses to take meaningful action in the fight against climate change.<br>
+At Carbon Gauge, we believe that sustainability should be simple and accessible for everyone.<br>Our platform provides easy-to-use tools that allow you to measure, track, and reduce your carbon emissions whether you're an individual looking to make greener choices or a company aiming to meet sustainability goals.Our expert team combines data science, sustainability expertise, and innovative technology to create solutions that make a real difference. From actionable insights to personalized recommendations, we’re here to help you navigate your sustainability journey with confidence and ease.Beyond our platform, we are committed to fostering a global community of environmentally conscious individuals and businesses. <br>Through resources, workshops, and events, we aim to inspire and connect people who share a common goal: a cleaner, more sustainable future for all.
+                </p>
+                <abbr title="">Join Us in Creating a Sustainable Future
+                    At Carbon Gauge, we’re committed to helping you reduce your carbon footprint and make a positive impact on the planet.</abbr>
+                <br><br>
+                <marquee bgcolor="#ccc" loop="-1" scrollamount="5" width="100%"> Thank you for choosing Carbon Gauge as your sustainability partner. Together, let's create a greener, more sustainable future!</marquee>
+        </div>
+    </section>
+
+    <section id="feature" class="section-p1">
+        <div class="fe-box">
+            <img src="img/foot.jpg" alt="" width="100" height="100">
+            <h6>Footprint Tracker</h6>
+        </div>
+        <div class="fe-box">
+            <img src="img/insight.jpg" alt="" width="100" height="100">
+            <h6>Personalized Insights</h6>
+        </div>
+        <div class="fe-box">
+            <img src="img/time.jpg" alt="" width="100" height="100">
+            <h6>Real-Time Monitoring</h6>
+        </div>
+        <div class="fe-box">
+            <img src="img/Promotions.jpeg" alt="" width="100" height="100">
+            <h6>Promotions</h6>
+        </div>
+        <div class="fe-box">
+            <img src="img/Offsset.jpg" alt="" width="100" height="100">
+            <h6>Offsset Calculator</h6>
+        </div>
+        <div class="fe-box">
+            <img src="img/rewards.jpeg" alt="" width="100" height="100">
+            <h6>Rewards</h6>
+        </div>
+
+    </section>
+
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Sign Up For Newsletters</h4> 
+            <p>E-mail updates about our latest shop and <span style="color:#47c35d";>special offers.</span>
+            </p>
+        </div>
+        <div class="form">
+            <input type="test" placeholder="Your email address">
+            <button class="normal">Sign Up</button>
+        </div>
+        </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="img/logo.png" alt="" width="55" height="65">
+            <h4>Contact</h4>
+            <p><strong>Address:</strong> #224th cross JHBCS layout <br><br>BSK 2nd stage Benguluru-78</p><br>
+            <p><strong>Phone:</strong> 080 775 6352/ 080 835 2635</p><br>
+            <div class="follow">
+                <h4>Follow us</h4>
+            <div class="icon">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-printerest"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4><br>
+            <a href="#">About us</a><br>
+            <a href="#">FAQs</a><br>
+            <a href="#">Privacy Policy</a><br>
+            <a href="#">Terms & Conditions</a><br>
+            <a href="#">Contact Us</a><br>
+
+        </div>
+
+        <div class="col">
+            <h4>What We Do</h4><br>
+            <a href="#">Sign In</a><br>
+            <a href="#">Carbon Footprint Assessment</a><br>
+            <a href="#">Community Engagement</a><br>
+            <a href="#">Workshops</a><br>
+            <a href="#">Help</a><br>
+        </div>
+
+        <div class="col install">
+            <h4>Make an Impact</h4><br>
+            <p>Get Started</p><br>
+            <div class="row">
+                <p>Rewards</p><br>
+                <p>Goals</p><br>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>Copyright © 2024-2028 - Carbon Gauge. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- Floating Chat Button -->
+  <button id="chat-btn">💬</button>
+
+  <!-- Chat Container (Initially hidden) -->
+  <div class="chat-container" id="chat-container">
+    <div class="chat-header">
+      EcoBuddy - Your Carbon Footprint Assistant
+    </div>
+    <div class="chat-box" id="chatbox">
+      <!-- Messages will appear here -->
+    </div>
+    
+    <div class="input-container">
+      <input type="text" id="user-input" placeholder="Type your message..." />
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    // Show/Hide chat container
+    const chatBtn = document.getElementById('chat-btn');
+    const chatContainer = document.getElementById('chat-container');
+    
+    chatBtn.addEventListener('click', () => {
+      chatContainer.style.display = (chatContainer.style.display === 'none' || chatContainer.style.display === '') ? 'block' : 'none';
+    });
+
+    const questionsAndAnswers = {
+      "Hi": {
+        message: "Hello! I'm EcoBuddy, your assistant for tracking and reducing your carbon footprint. Ready to get started?",
+        options: [
+          { text: "How often do you use your car?", response: "Car usage" },
+          { text: "How often do you use public transport?", response: "Public transport" },
+          { text: "Do you use renewable energy at home?", response: "Energy consumption" }
+        ]
+      },
+      "Car usage": {
+        message: "How often do you use your car? (Daily, Weekly, Rarely)",
+        options: [
+          { text: "Daily", response: "Frequent car use" },
+          { text: "Weekly", response: "Occasional car use" },
+          { text: "Rarely", response: "Minimal car use" }
+        ]
+      },
+      "Public transport": {
+        message: "How often do you use public transport? (Daily, Weekly, Rarely)",
+        options: [
+          { text: "Daily", response: "Frequent use of public transport" },
+          { text: "Weekly", response: "Occasional use of public transport" },
+          { text: "Rarely", response: "Minimal use of public transport" }
+        ]
+      },
+      "Energy consumption": {
+        message: "Do you use renewable energy at home? (Yes, No)",
+        options: [
+          { text: "Yes", response: "Renewable energy user" },
+          { text: "No", response: "Non-renewable energy user" }
+        ]
+      },
+      // Responses
+      "Frequent car use": { message: "Frequent car use increases your carbon footprint. EcoBuddy suggests carpooling or using public transport to reduce emissions.", options: [] },
+      "Occasional car use": { message: "Occasional car use is a good start! EcoBuddy recommends reducing usage or switching to an electric vehicle to lower emissions.", options: [] },
+      "Minimal car use": { message: "Great! Using a car less frequently significantly reduces your carbon footprint. Keep it up!", options: [] },
+      "Frequent use of public transport": { message: "Great job! Frequent public transport use significantly lowers your carbon footprint. Keep it up!", options: [] },
+      "Occasional use of public transport": { message: "Consider using public transport more often to further reduce your carbon footprint. Small changes add up!", options: [] },
+      "Minimal use of public transport": { message: "If possible, consider using public transport more frequently. It's a simple way to lower your carbon footprint.", options: [] },
+      "Renewable energy user": { message: "Fantastic! Using renewable energy cuts emissions and saves long-term costs. Keep exploring more sustainable solutions.", options: [] },
+      "Non-renewable energy user": { message: "Switching to renewable energy (like solar or wind) is a great step to lower your carbon footprint. Look into government incentives.", options: [] }
+    };
+
+    document.getElementById('send-btn').addEventListener('click', function() {
+      const userMessage = document.getElementById('user-input').value;
+
+      if (userMessage.trim() === '') return;
+
+      displayMessage(userMessage, 'user');
+      document.getElementById('user-input').value = '';
+
+      setTimeout(() => {
+        const botMessage = getBotResponse(userMessage);
+        displayMessage(botMessage.message, 'bot');
+        if (botMessage.options && botMessage.options.length > 0) {
+          displayOptions(botMessage.options);
+        }
+      }, 1000);
+    });
+
+    function displayMessage(message, sender) {
+      const chatbox = document.getElementById('chatbox');
+      const messageElement = document.createElement('div');
+      messageElement.classList.add(sender === 'user' ? 'user-msg' : 'bot-msg');
+      messageElement.textContent = message;
+      chatbox.appendChild(messageElement);
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    function displayOptions(options) {
+      clearOldOptions();
+      const chatbox = document.getElementById('chatbox');
+      
+      // Add Back Button
+      const backButton = document.createElement('button');
+      backButton.classList.add('back-btn');
+      backButton.textContent = 'Back';
+      backButton.onclick = function() {
+        clearChatbox();
+        const initialMessage = questionsAndAnswers['Hi'];
+        displayMessage(initialMessage.message, 'bot');
+        displayOptions(initialMessage.options);
+      };
+      chatbox.appendChild(backButton);
+
+      // Display options
+      options.forEach(option => {
+        const button = document.createElement('button');
+        button.classList.add('option-btn');
+        button.textContent = option.text;
+        button.onclick = function() {
+          displayMessage(option.text, 'user');
+          const botMessage = getBotResponse(option.response);
+          displayMessage(botMessage.message, 'bot');
+          if (botMessage.options && botMessage.options.length > 0) {
+            displayOptions(botMessage.options);
+          }
+        };
+        chatbox.appendChild(button);
+      });
+    }
+
+    function clearOldOptions() {
+      const chatbox = document.getElementById('chatbox');
+      const buttons = chatbox.querySelectorAll('.option-btn, .back-btn');
+      buttons.forEach(button => button.remove());
+    }
+
+    function clearChatbox() {
+      const chatbox = document.getElementById('chatbox');
+      chatbox.innerHTML = ''; // Clears all messages and buttons
+    }
+
+    function getBotResponse(userMessage) {
+      const trimmedMessage = userMessage.trim().toLowerCase();
+      for (let key in questionsAndAnswers) {
+        if (trimmedMessage === key.toLowerCase()) {
+          return questionsAndAnswers[key];
+        }
+      }
+      return { message: "Sorry, EcoBuddy didn't quite understand that. Can you ask something else?", options: [] };
+    }
+
+    window.onload = () => {
+      setTimeout(() => {
+        const initialMessage = questionsAndAnswers['Hi'];
+        displayMessage(initialMessage.message, 'bot');
+        displayOptions(initialMessage.options);
+      }, 500);
+    };
+  </script>
+</body>
+</html>
